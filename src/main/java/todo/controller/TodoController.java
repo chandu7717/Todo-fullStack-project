@@ -18,7 +18,6 @@ public class TodoController {
 
 	@Autowired
 	TodoService service;
-
 	@GetMapping({ "/", "/login" })
 	public String loadLogin() {
 		return "index";
@@ -68,17 +67,15 @@ public class TodoController {
 	public String deleteTask(@RequestParam int id, HttpSession session, ModelMap map) {
 		return service.deleteTask(id, session, map);
 	}
-	
+
 	@GetMapping("/edit")
-	public String loadEdit(HttpSession session,ModelMap map,@RequestParam int id)
-	{
-		return service.loadEdit(session,map,id);
+	public String loadEdit(HttpSession session, ModelMap map, @RequestParam int id) {
+		return service.loadEdit(session, map, id);
 	}
-	
+
 	@PostMapping("/update-task")
-	public String updateTask(HttpSession session,ModelMap map,TodoTask task)
-	{
-		return service.updateTask(task,session,map);
+	public String updateTask(HttpSession session, ModelMap map, TodoTask task) {
+		return service.updateTask(task, session, map);
 	}
 
 }

@@ -35,7 +35,7 @@ public class TodoService {
 			if (list.isEmpty()) {
 				dao.save(user);
 				map.put("pass", "Account Created Success");
-				return "Login";
+				return "index";
 			} else {
 				map.put("email", "* Email Should be Unique");
 				return "Signup";
@@ -44,12 +44,15 @@ public class TodoService {
 	}
 
 	public String login(String email, String password, ModelMap map, HttpSession session) {
+		//here we are fetching the all data of the user and making the authentication.....In the list all the
+		//data of the user is present
 		List<TodoUser> list = dao.findByEmail(email);
 		if (list.isEmpty()) {
-			map.put("email", "* Incorrect Email");
+			map.put("email", "* Email ID is empty");
 			return "index";
 		} else {
 			if (password.equals(AES.decrypt(list.get(0).getPassword(), "123"))) {
+				//it will set the session to verify the username and password
 				session.setAttribute("todouser", list.get(0));
 
 				map.put("list", dao.fetchAllTask(list.get(0).getId()));
